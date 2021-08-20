@@ -47,4 +47,16 @@ function gotPoses(results) {
 
 function draw() {
     image(video, 0, 0, 600, 450);
+
+    fill("#42f587");
+    stroke("#42b3f5");
+    circle(leftWristX , leftWristY, 20 );
+
+    numberLeftWristY = Number(leftWristY);
+    remove_decimal = floor(numberLeftWristY);
+    
+    volume = remove_decimal/450;
+    document.getElementById("volume").innerHTML = "Volume: " + volume;
+    song.setVolume(volume);
+
 }
