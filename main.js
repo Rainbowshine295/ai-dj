@@ -1,7 +1,7 @@
 song = "";
 
 scoreLeftWrist = 0;
-
+scoreRightWrist = 0;
 
 leftWristX = 0;
 leftWristY = 0;
@@ -41,6 +41,9 @@ function gotPoses(results) {
         scoreLeftWrist = results[0].pose.keypoints[9].score;
         console.log("score left wrist  = " + scoreLeftWrist);
 
+        scoreRightWrist = results[0].pose.keypoints[10].score;
+        console.log("score right wrist = " + scoreRightWrist);
+
         leftWristX = results[0].pose.leftWrist.x;
         leftWristY = results[0].pose.leftWrist.y;
         console.log("Left wrist x = " + leftWristX + " Left wrist y = " + leftWristY);
@@ -68,4 +71,29 @@ function draw() {
     document.getElementById("volume").innerHTML = "Volume: " + volume;
     song.setVolume(volume);
     }
+
+    if (scoreRightWrist > 0.2) {
+    circle(rightWristX, rightWristY, 20);
+
+    if (rightWristY > 0 && rightWristY <= 100) {
+        document.getElementById("speed").innerHTML = "Speed = 0.5x";
+        song.rate(0.5);
+    }
+    if (rightWristY > 100 && rightWristY <= 200) {
+        document.getElementById("speed").innerHTML = "Speed = 1x";
+        song.rate(1);
+    }
+    if (rightWristY > 200 && rightWristY <= 300) {
+        document.getElementById("speed").innerHTML = "Speed = 1.5x";
+        song.rate(1.5);
+    }
+    if (rightWristY > 300 && rightWristY <= 400) {
+        document.getElementById("speed").innerHTML = "Speed = 2x";
+        song.rate(2);
+    }
+    if (rightWristY > 400 && rightWristY <= 450) {
+        document.getElementById("speed").innerHTML = "Speed = 2.5x";
+        song.rate(2.5);
+    }
+}
 }
